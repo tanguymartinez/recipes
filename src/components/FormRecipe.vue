@@ -14,8 +14,17 @@
     </form>
     <list-dynamic :items="items">
       <template #item="{ item }">{{ item }}</template>
+      <template #input>
+        <input
+          ref="inputItem"
+          type="text"
+          name="new"
+          placeholder="New item..."
+          @keydown.enter.prevent="addItem('inputItem', 'items')"
+        />
+      </template>
       <template #button>
-        <button value="Add" />
+        <button @click="addItem('inputItem', 'items')">Add</button>
       </template>
     </list-dynamic>
   </div>
@@ -36,6 +45,20 @@ export default {
   },
   components: {
     ListDynamic
+  },
+  methods: {
+    addItem: function(name, collection) {
+      if (!this.$refs.hasOwnProperty(name)) {
+        console.exception(`"${name}" ref does not exist`);
+        return;
+      }
+      if (!this.hasOwnProperty(collection)) {
+        console.exception(`"${collection}" property does not exist`);
+        return;
+      }
+      this[collection].push(this.$refs[name].value);
+      this.$refs[name].value = "";
+    }
   }
 };
 </script>
