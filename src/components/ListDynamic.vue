@@ -5,9 +5,8 @@
         <slot name="item" :item="item"></slot>
       </template>
     </list>
-    <slot name="button">
-      <button @click="add" value="Add" />
-    </slot>
+    <slot name="input"></slot>
+    <slot name="button"></slot>
   </div>
 </template>
 
@@ -20,11 +19,6 @@ export default {
   props: {
     items: {
       required: true
-    }
-  },
-  methods: {
-    add: function(e) {
-      this.$emit("add", e.target.value);
     }
   },
   components: {
