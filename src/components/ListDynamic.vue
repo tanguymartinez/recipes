@@ -35,9 +35,14 @@ export default {
 
 <style lang="sass" scoped>
 .list-dynamic-control
-  display: flex
-  flex-direction: row
-  justify-content: space-around
+  >*
+    margin-left: .5rem
+    margin-right: .5rem
+    &:first-child
+      margin-left: 0
+      &:last-child
+        margin-left: 1rem
+        margin-right: 0
   input
     margin-bottom: 0
 
