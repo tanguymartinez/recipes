@@ -11,47 +11,19 @@
         placeholder="Additional ingredient..."
         @item-add="ingredients.push($event)"
         @item-remove="ingredients.splice($event, 1)"
+        @item-modify="ingredients.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-standard>
-      <!-- <list-dynamic :items="ingredients">
-        <template #item="{ item }">
-          <p>{{ item }}</p>
-        </template>
-        <template #input>
-          <input
-            ref="inputIngredient"
-            type="text"
-            name="newIngredient"
-            placeholder="Additional ingredient..."
-            @keydown.enter.prevent="addItem('inputIngredient', 'ingredients')"
-          />
-        </template>
-        <template #buttonRemove="{ idx }">
-          <button @click.prevent="removeItem(idx, 'ingredients')">X</button>
-        </template>
-        <template #buttonAdd>
-          <button @click.prevent="addItem('inputIngredient', 'ingredients')">Add</button>
-        </template>
-      </list-dynamic>-->
       <label for="instructions">Instructions:</label>
-      <input type="text" name="instructions" id="instructions" />
+      <list-dynamic-standard
+        :items="instructions"
+        placeholder="Additional step..."
+        @item-add="instructions.push($event)"
+        @item-remove="instructions.splice($event, 1)"
+        @item-modify="instructions.splice($event.idx, 1, $event.newValue)"
+      ></list-dynamic-standard>
       <label for="notes">Notes:</label>
       <textarea name="notes" id="notes" cols="30" rows="10" v-model="notes"></textarea>
     </form>
-    <!-- <list-dynamic :items="items">
-      <template #item="{ item }">{{ item }}</template>
-      <template #input>
-        <input
-          ref="inputItem"
-          type="text"
-          name="new"
-          placeholder="New item..."
-          @keydown.enter.prevent="addItem('inputItem', 'items')"
-        />
-      </template>
-      <template #button>
-        <button @click.prevent="addItem('inputItem', 'items')">Add</button>
-      </template>
-    </list-dynamic>-->
   </div>
 </template>
 
@@ -72,6 +44,7 @@ export default {
     ListDynamicStandard
   },
   methods: {
+    log: console.log,
     addItem: function(name, collection) {
       if (!this.$refs.hasOwnProperty(name)) {
         console.error(`"${name}" ref does not exist`);
@@ -100,28 +73,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-form
-  display: flex
-  flex-direction: column
-  justify-content: space-around
-  max-width: 50rem
-  width: 50%
-  min-width: 35rem
-  margin: auto
-  label
-    margin-bottom: 1rem
-    text-align: left
-  input, textarea
-    margin-bottom: 2rem
-    border-radius: 7px
-    border: 1.5px solid rgb(32, 148, 201)
-  textarea
-    resize: none
-  .list-dynamic
-    min-width: 20rem
-    width: 50%
-    text-align: left
-    margin-bottom: 2rem
-    p
-      margin: 0
+@use "../assets/mixins"
+@include mixins.default-form
 </style>

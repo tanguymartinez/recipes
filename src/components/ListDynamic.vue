@@ -3,7 +3,8 @@
     <list :items="items">
       <template v-slot:default="{ item, idx }">
         <div class="list-dynamic-item">
-          <slot name="item" :item="item"></slot>
+          <slot name="item" :item="item" :idx="idx"></slot>
+          <slot name="buttonLock" :idx="idx"></slot>
           <slot name="buttonRemove" :idx="idx"></slot>
         </div>
       </template>
