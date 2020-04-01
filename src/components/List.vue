@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="(item, idx) in items" :key="item + idx">
-      <slot :item="item"></slot>
+      <slot :item="item" :idx="idx"></slot>
     </li>
   </ul>
 </template>
