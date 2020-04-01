@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="lockable">
     <slot :attrs="attrs" :locked="locked"></slot>
     <!-- <input ref="input" type="text" :value="item" v-if="lock" /> -->
     <button @click.prevent="toggle" v-if="locked">L</button>
