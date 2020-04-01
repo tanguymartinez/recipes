@@ -1,12 +1,17 @@
 <template>
-  <div>
+  <div class="list-dynamic">
     <list :items="items">
-      <template v-slot:default="{ item }">
-        <slot name="item" :item="item"></slot>
+      <template v-slot:default="{ item, idx }">
+        <div class="list-dynamic-item">
+          <slot name="item" :item="item"></slot>
+          <slot name="buttonRemove" :idx="idx"></slot>
+        </div>
       </template>
     </list>
-    <slot name="input"></slot>
-    <slot name="button"></slot>
+    <div class="list-dynamic-control">
+      <slot name="input"></slot>
+      <slot name="buttonAdd"></slot>
+    </div>
   </div>
 </template>
 
@@ -27,5 +32,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass" scoped>
+.list-dynamic-control
+  display: flex
+  flex-direction: row
+  justify-content: space-around
+  input
+    margin-bottom: 0
+
+.list-dynamic-item
+  display: flex
+  flex-direction: row
+  justify-content: space-between
 </style>
