@@ -1,6 +1,6 @@
 <template>
   <div class="list-dynamic">
-    <list :items="items">
+    <list :items="items" :ordered="ordered">
       <template v-slot:default="{ item, idx }">
         <div class="list-dynamic-item">
           <slot name="item" :item="item" :idx="idx"></slot>
@@ -25,6 +25,10 @@ export default {
   props: {
     items: {
       required: true
+    },
+    ordered: {
+      type: Boolean,
+      default: false
     }
   },
   components: {

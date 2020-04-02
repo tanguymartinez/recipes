@@ -1,5 +1,5 @@
 <template>
-  <list-dynamic :items="items">
+  <list-dynamic :items="items" :ordered="ordered">
     <template #item="{ item, idx }">
       <lockable
         v-slot:default="{ attrs, locked }"
@@ -44,6 +44,10 @@ export default {
     placeholder: {
       type: String,
       default: ""
+    },
+    ordered: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

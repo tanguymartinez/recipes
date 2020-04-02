@@ -23,6 +23,7 @@
       <label for="instructions">Instructions:</label>
       <list-dynamic-standard
         :items="instructions"
+        :ordered="true"
         placeholder="Additional step..."
         @item-add="instructions.push($event)"
         @item-remove="instructions.splice($event, 1)"
