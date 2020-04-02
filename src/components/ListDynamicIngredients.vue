@@ -35,7 +35,12 @@
       </lockable>
     </template>
     <template #buttonRemove="{ idx }">
-      <button @click.prevent="itemRemove(idx)">X</button>
+      <img
+        class="button-remove"
+        src="../assets/img/remove.svg"
+        alt="remove icon"
+        @click.prevent="itemRemove(idx)"
+      />
     </template>
     <template #input>
       <input
@@ -56,7 +61,7 @@
       </select>
     </template>
     <template #buttonAdd>
-      <button @click.prevent="itemAdd">Add</button>
+      <img class="button-add" src="../assets/img/add.svg" alt="add icon" @click.prevent="itemAdd" />
     </template>
   </list-dynamic>
 </template>
@@ -156,9 +161,12 @@ input:disabled
     margin-right: .5rem
     &:first-child
       margin-left: 0
-      &:last-child
-        margin-left: 1rem
-        margin-right: 0
+    &:last-child
+      margin-left: 1rem
+      margin-right: 0
 .input-quantity
   width: 3rem
+
+[class^="button"]
+  @include mixins.button
 </style>

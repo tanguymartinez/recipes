@@ -15,13 +15,18 @@
       </lockable>
     </template>
     <template #buttonRemove="{ idx }">
-      <button @click.prevent="itemRemove(idx)">X</button>
+      <img
+        class="button-remove"
+        src="../assets/img/remove.svg"
+        alt="remove icon"
+        @click.prevent="itemRemove(idx)"
+      />
     </template>
     <template #input>
       <p class="editable" ref="inputAdd" contenteditable="true"></p>
     </template>
     <template #buttonAdd>
-      <button @click.prevent="itemAdd">Add</button>
+      <img class="button-add" src="../assets/img/add.svg" alt="add icon" @click.prevent="itemAdd" />
     </template>
   </list-dynamic>
 </template>
@@ -92,21 +97,31 @@ p[contenteditable="false"]
 ::v-deep.lockable
   display: flex
   align-items: center
+  width: calc(100% - .4rem)
   p
     padding: .2rem
     margin: .2rem
+    width: 100%
   >*
     margin-left: .5rem
     margin-right: .5rem
     &:first-child
       margin-left: 0
     &:last-child
-      margin-left: 1rem
-      margin-right: 0
+      margin-left: .2rem
+      margin-right: .4rem
 
 .editable
   max-width: 100%
   word-wrap: break-word
   min-height: 1.2rem
   @include mixins.default-form-input
+
+.list-dynamic-control
+  p
+    width: 90%
+    margin: 0
+
+[class^="button"]
+  @include mixins.button
 </style>
