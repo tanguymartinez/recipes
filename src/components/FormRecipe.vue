@@ -21,14 +21,13 @@
         @item-modify="ingredients.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-standard>-->
       <label for="instructions">Instructions:</label>
-      <list-dynamic-standard
+      <list-dynamic-steps
         :items="instructions"
         :ordered="true"
-        placeholder="Additional step..."
         @item-add="instructions.push($event)"
         @item-remove="instructions.splice($event, 1)"
         @item-modify="instructions.splice($event.idx, 1, $event.newValue)"
-      ></list-dynamic-standard>
+      ></list-dynamic-steps>
       <label for="notes">Notes:</label>
       <textarea name="notes" id="notes" cols="30" rows="10" v-model="notes"></textarea>
     </form>
@@ -36,7 +35,7 @@
 </template>
 
 <script>
-import ListDynamicStandard from "./ListDynamicStandard";
+import ListDynamicSteps from "./ListDynamicSteps";
 import ListDynamicIngredients from "./ListDynamicIngredients";
 export default {
   data: function() {
@@ -49,7 +48,7 @@ export default {
     };
   },
   components: {
-    ListDynamicStandard,
+    ListDynamicSteps,
     ListDynamicIngredients
   },
   methods: {
