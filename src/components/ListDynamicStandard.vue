@@ -89,4 +89,14 @@ button
 input:disabled
   background-color: #1ed6ab70
   border: 1.5px solid transparent
+
+::v-deep.lockable
+  >*
+    margin-left: .5rem
+    margin-right: .5rem
+    &:first-child
+      margin-left: 0
+      &:last-child
+        margin-left: 1rem
+        margin-right: 0
 </style>

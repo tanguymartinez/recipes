@@ -68,7 +68,18 @@ export default {
   data: function() {
     return {
       uncommitted: new Map(),
-      units: ["mL", "L", "g", "kg", "ts", "tbs", "quarter", "half", "whole"]
+      units: [
+        "mL",
+        "L",
+        "g",
+        "kg",
+        "ts",
+        "tbs",
+        "pinch",
+        "quarter",
+        "half",
+        "whole"
+      ]
     };
   },
   props: {
@@ -129,26 +140,25 @@ export default {
 @use "../assets/mixins"
 
 input
-    @include mixins.default-form-input
+  @include mixins.default-form-input
 
 p, input
-    margin: 0
+  margin: 0
 button
-    padding: 0
+  padding: 0
 
 input:disabled
-    background-color: #1ed6ab70
-    border: 1.5px solid transparent
+  @include mixins.input-disabled
 
 ::v-deep.lockable
-    >*
-        margin-left: .5rem
-        margin-right: .5rem
-        &:first-child
-            margin-left: 0
-        &:last-child
-            margin-left: 1rem
-            margin-right: 0
+  >*
+    margin-left: .5rem
+    margin-right: .5rem
+    &:first-child
+      margin-left: 0
+      &:last-child
+        margin-left: 1rem
+        margin-right: 0
 .input-quantity
-    width: 3rem
+  width: 3rem
 </style>
