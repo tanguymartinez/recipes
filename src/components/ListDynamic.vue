@@ -38,7 +38,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@use "../assets/mixins"
 .list-dynamic-control
+  display: flex
+  align-items: center
   >*
     margin-left: .5rem
     margin-right: .5rem
