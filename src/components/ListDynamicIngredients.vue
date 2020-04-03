@@ -173,4 +173,3 @@ input:disabled
 [class*="button-add"], [class*="button-remove"]
   @include mixins.hover-rotate-half
 </style>
-</style>
