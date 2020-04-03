@@ -7,14 +7,14 @@
       class="button-locked"
       alt="lock locked icon"
       @click.prevent="toggle"
-      v-if="locked"
+      v-show="locked"
     />
     <img
       src="../assets/img/unlocked.svg"
       class="button-unlocked"
       alt="lock unlocked icon"
       @click.prevent="toggle"
-      v-if="!locked"
+      v-show="!locked"
     />
   </div>
 </template>
