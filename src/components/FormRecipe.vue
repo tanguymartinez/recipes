@@ -23,7 +23,7 @@
       ></list-dynamic-steps>
       <label for="notes">Notes:</label>
       <textarea name="notes" id="notes" cols="30" rows="10" v-model="notes"></textarea>
-      <input type="submit" value="Save" />
+      <input type="submit" value="Save" @click.prevent="save" />
     </form>
   </div>
 </template>
@@ -34,6 +34,7 @@ import ListDynamicIngredients from "./ListDynamicIngredients";
 export default {
   data: function() {
     return {
+      id: null,
       name: "",
       description: "",
       ingredients: [],
@@ -69,6 +70,13 @@ export default {
         return;
       }
       this[collection].splice(idx, 1);
+    },
+    save: function() {
+      this.id = parseInt(localStorage.getItem("id")) + 1;
+      var recipes = JSON.parse(localStorage.getItem("recipes"));
+      recipes.push(this.$data);
+      localStorage.setItem("recipes", JSON.stringify(recipes));
+      localStorage.setItem("id", this.id);
     }
   }
 };

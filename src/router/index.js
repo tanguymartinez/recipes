@@ -32,4 +32,14 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem("recipes") == null) {
+    localStorage.setItem("recipes", JSON.stringify([]));
+  }
+  if (localStorage.getItem("id") == null) {
+    localStorage.setItem("id", 0);
+  }
+  next();
+})
+
 export default router
