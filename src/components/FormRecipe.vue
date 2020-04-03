@@ -13,20 +13,13 @@
         @item-remove="ingredients.splice($event, 1)"
         @item-modify="ingredients.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-ingredients>
-      <!-- <list-dynamic-standard
-        :items="ingredients"
-        placeholder="Additional ingredient..."
-        @item-add="ingredients.push($event)"
-        @item-remove="ingredients.splice($event, 1)"
-        @item-modify="ingredients.splice($event.idx, 1, $event.newValue)"
-      ></list-dynamic-standard>-->
       <label for="instructions">Instructions:</label>
       <list-dynamic-steps
         :items="instructions"
         :ordered="true"
         @item-add="instructions.push($event)"
         @item-remove="instructions.splice($event, 1)"
-        @item-modify="this.$set(instructions, $event.idx, $event.newValue)"
+        @item-modify="instructions.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-steps>
       <label for="notes">Notes:</label>
       <textarea name="notes" id="notes" cols="30" rows="10" v-model="notes"></textarea>

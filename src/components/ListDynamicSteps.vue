@@ -9,8 +9,8 @@
         <p
           class="editable"
           :contenteditable="!locked"
-          @input.prevent="updateUncommitted($event.target.innerHTML, idx)"
-          v-html="attrs.item"
+          @input.prevent="updateUncommitted({ value: $event.target.innerHTML}, idx)"
+          v-html="attrs.item.value"
         ></p>
       </lockable>
     </template>
@@ -57,8 +57,11 @@ export default {
   },
   methods: {
     itemAdd: function(e) {
-      this.$emit("item-add", this.$refs.inputAdd.innerHTML);
-      this.$refs.inputAdd.innerText = "";
+      var payload = {
+        value: this.$refs.inputAdd.innerHTML
+      };
+      this.$emit("item-add", payload);
+      this.$refs.inputAdd.innerHTML = "";
     },
     itemRemove: function(idx) {
       this.$emit("item-remove", idx);
@@ -68,9 +71,20 @@ export default {
         return;
       }
       this.$emit("item-modify", { newValue: this.uncommitted.get(idx), idx });
+      this.uncommitted.delete(idx);
     },
-    updateUncommitted: function(value, idx) {
-      this.uncommitted.set(idx, value);
+    updateUncommitted: function(change, idx) {
+      var result;
+      if (this.uncommitted.has(idx)) {
+        result = {
+          ...this.items[idx],
+          ...this.uncommitted.get(idx),
+          ...change
+        };
+      } else {
+        result = { ...this.items[idx], ...change };
+      }
+      this.uncommitted.set(idx, result);
     }
   },
   components: {
