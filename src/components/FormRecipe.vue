@@ -23,6 +23,7 @@
       ></list-dynamic-steps>
       <label for="notes">Notes:</label>
       <textarea name="notes" id="notes" cols="30" rows="10" v-model="notes"></textarea>
+      <input type="submit" value="Save" />
     </form>
   </div>
 </template>
