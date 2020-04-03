@@ -169,4 +169,8 @@ input:disabled
 
 [class^="button"]
   @include mixins.button
+
+[class*="button-add"], [class*="button-remove"]
+  @include mixins.hover-rotate-half
+</style>
 </style>
