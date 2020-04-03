@@ -1,13 +1,17 @@
 <template>
   <ul v-if="!ordered">
-    <li v-for="(item, idx) in items" :key="item + idx">
-      <slot :item="item" :idx="idx"></slot>
-    </li>
+    <transition-group name="list">
+      <li v-for="(item, idx) in items" :key="item + idx">
+        <slot :item="item" :idx="idx"></slot>
+      </li>
+    </transition-group>
   </ul>
   <ol v-else>
-    <li v-for="(item, idx) in items" :key="item + idx">
-      <slot :item="item" :idx="idx"></slot>
-    </li>
+    <transition-group name="list">
+      <li v-for="(item, idx) in items" :key="item + idx">
+        <slot :item="item" :idx="idx"></slot>
+      </li>
+    </transition-group>
   </ol>
 </template>
 
@@ -26,5 +30,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 250ms;
+}
+.list-enter {
+  opacity: 0;
+  transform: translateY(3rem) scale(0);
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(6rem);
+}
 </style>

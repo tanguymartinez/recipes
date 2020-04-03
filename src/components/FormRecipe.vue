@@ -26,7 +26,7 @@
         :ordered="true"
         @item-add="instructions.push($event)"
         @item-remove="instructions.splice($event, 1)"
-        @item-modify="instructions.splice($event.idx, 1, $event.newValue)"
+        @item-modify="this.$set(instructions, $event.idx, $event.newValue)"
       ></list-dynamic-steps>
       <label for="notes">Notes:</label>
       <textarea name="notes" id="notes" cols="30" rows="10" v-model="notes"></textarea>
