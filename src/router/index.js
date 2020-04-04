@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import FormRecipe from '../components/FormRecipe'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
+import FormRecipe from '../components/FormRecipe';
+import ShowRecipe from '../components/ShowRecipe';
 import store from '../store/index';
 
 Vue.use(VueRouter)
@@ -16,6 +17,11 @@ const routes = [
     path: '/new',
     name: 'new',
     component: FormRecipe
+  },
+  {
+    path: '/recipe/:id',
+    name: 'recipe',
+    component: ShowRecipe
   },
   {
     path: '/about',

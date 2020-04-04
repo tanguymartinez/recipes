@@ -1,18 +1,83 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>My recipes</h1>
+    <div id="container-recipes">
+      <div class="thumbnail-recipe" v-for="(recipe,idx) in recipes" :key="recipes + idx">
+        <p>{{ recipe.name }}</p>
+        <router-link class="link-recipe" :to="{ name: 'recipe', params: { id: recipe.id }}"></router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapState } from "vuex";
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  name: "Home",
+  components: {},
+  computed: {
+    ...mapState(["recipes"])
   }
-}
+};
 </script>
+
+<style lang="sass" scoped>
+@use "../assets/mixins"
+@include mixins.fonts
+
+.home
+  display: flex
+  flex-direction: column
+  justify-content: space-evenly
+  text-align: left
+  >h1
+    font-family: "Photoshoot"
+    text-align: center
+  .thumbnail-recipe
+    position: relative
+    margin: 1rem
+    background-color: #fcf451
+    // background-color: #6dd6e8
+    border-radius: 10px
+    min-height: 6rem
+    min-width: 6rem
+    padding: 1rem
+    box-shadow: 0 0 0px #17a1bd
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: flex-start
+    transition: all 250ms
+    border: 1.5px solid transparent
+    &:hover
+      box-shadow: 0 0 40px 5px #2ec2c9
+      // border: 1.5px solid #254b9c
+      cursor: pointer
+      transform: scale(1.05)
+    *:last-child
+      align-self: flex-end
+  #container-recipes
+    color: #2ec2c9
+    display: grid
+    grid-template-columns: repeat(4, 25%)
+    div:first-child
+      grid-column: 1 / span 2
+      grid-row: 1 / span 2
+    div:nth-child(2)
+      grid-column: 3 / span 2
+    div:nth-child(3)
+      grid-column: 3 / span 2
+    div:nth-child(4)
+      grid-column: 1 / span 2
+    div:nth-child(5)
+      grid-column: 3 / span 2
+      grid-row: 4 / span 1
+  .link-recipe
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+</style>
