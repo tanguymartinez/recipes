@@ -4,6 +4,9 @@
     <div id="container-recipes">
       <div class="thumbnail-recipe" v-for="(recipe,idx) in recipes" :key="recipes + idx">
         <p>{{ recipe.name }}</p>
+        <div class="div-fill">
+          <img class="arrow-next" src="../assets/img/arrow-next.svg" alt="right arrow" />
+        </div>
         <router-link class="link-recipe" :to="{ name: 'recipe', params: { id: recipe.id }}"></router-link>
       </div>
     </div>
@@ -36,6 +39,7 @@ export default {
     font-family: "Photoshoot"
     text-align: center
   .thumbnail-recipe
+    overflow: hidden
     position: relative
     margin: 1rem
     background-color: #fcf451
@@ -50,14 +54,32 @@ export default {
     justify-content: space-between
     align-items: flex-start
     transition: all 250ms
-    border: 1.5px solid transparent
     &:hover
       box-shadow: 0 0 40px 5px #2ec2c9
-      // border: 1.5px solid #254b9c
       cursor: pointer
       transform: scale(1.05)
+      .div-fill
+        transform: translateX(calc( 2rem ))
+        opacity: 1
     *:last-child
       align-self: flex-end
+    .link-recipe
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+    .div-fill
+      width: 100%
+      transition: all 200ms ease-in
+      position: absolute
+      left: calc( 100% - 4.5rem )
+      height: 2rem
+      opacity: 0
+      transform: translateX(0)
+      top: calc( 100% - 2.5rem )
+    .arrow-next
+      width: 2rem
   #container-recipes
     color: #2ec2c9
     display: grid
@@ -74,10 +96,4 @@ export default {
     div:nth-child(5)
       grid-column: 3 / span 2
       grid-row: 4 / span 1
-  .link-recipe
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
 </style>
