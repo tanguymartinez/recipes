@@ -5,7 +5,9 @@
       <router-link :to="{ name: 'new'} ">NEW</router-link>
       <router-link :to="{name : 'about'}">ABOUT</router-link>
     </div>
-    <router-view />
+    <transition name="router-view" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -47,4 +49,13 @@ body
     }
   }
 }
+</style>
+<style lang="sass" scoped>
+.router-view-enter-active,
+.router-view-leave-active
+  transition: all 200ms
+
+.router-view-enter,.router-view-leave-to
+  opacity: 0
+  transform: translateY(2rem)
 </style>
