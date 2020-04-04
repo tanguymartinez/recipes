@@ -7,10 +7,9 @@
     label
         margin-bottom: 1rem
         text-align: left
+        display: none
     input, textarea
         margin-bottom: 2rem
-        border-radius: 7px
-        border: 1.5px solid rgb(32, 148, 201)
         padding: .2rem
         @include default-form-input
 
@@ -35,13 +34,12 @@
 
 @mixin default-form-input
     margin-bottom: 2rem
-    border-radius: 7px
-    border: 1.5px solid rgb(32, 148, 201)
     font-size: 1rem
+    border: 0
+    border-bottom: 2px solid rgb(32, 148, 201)
 
 @mixin input-disabled
     background-color: #1ed6ab70
-    border: 1.5px solid transparent
 
 @mixin button
     width: 1.5rem
@@ -57,3 +55,9 @@
     @font-face
         font-family: "Photoshoot"
         src: url("../assets/fonts/Photoshoot.ttf")
+
+@mixin editable
+    max-width: 100%
+    word-wrap: break-word
+    min-height: 1.2rem
+    white-space: pre-wrap
