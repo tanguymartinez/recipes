@@ -4,7 +4,7 @@
       <label for="name">Name:</label>
       <input type="text" name="name" id="name" v-model="name" />
       <label for="description">Description:</label>
-      <textarea name="description" id="description" cols="30" rows="10" v-model="description"></textarea>
+      <textarea-auto :value="description" @input="description = $event" />
       <label for="ingredients">Ingredients:</label>
       <list-dynamic-ingredients
         :items="ingredients"
@@ -31,6 +31,8 @@
 <script>
 import ListDynamicSteps from "./ListDynamicSteps";
 import ListDynamicIngredients from "./ListDynamicIngredients";
+import TextareaAuto from "./TextareaAuto";
+
 export default {
   data: function() {
     return {
@@ -44,7 +46,8 @@ export default {
   },
   components: {
     ListDynamicSteps,
-    ListDynamicIngredients
+    ListDynamicIngredients,
+    TextareaAuto
   },
   methods: {
     log: console.log,
@@ -82,4 +85,8 @@ export default {
 <style lang="sass" scoped>
 @use "../assets/mixins"
 @include mixins.default-form
+.editable
+  text-align: left
+  @include mixins.default-form-input
+  @include mixins.editable
 </style>
