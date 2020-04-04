@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import FormRecipe from '../components/FormRecipe'
+import store from '../store/index';
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,9 @@ router.beforeEach((to, from, next) => {
   }
   if (localStorage.getItem("id") == null) {
     localStorage.setItem("id", 0);
+  }
+  if (store.state.recipes.length == 0) {
+    store.dispatch("setRecipes", JSON.parse(localStorage.getItem("recipes")));
   }
   next();
 })

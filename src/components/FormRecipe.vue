@@ -73,10 +73,7 @@ export default {
     },
     save: function() {
       this.id = parseInt(localStorage.getItem("id")) + 1;
-      var recipes = JSON.parse(localStorage.getItem("recipes"));
-      recipes.push(this.$data);
-      localStorage.setItem("recipes", JSON.stringify(recipes));
-      localStorage.setItem("id", this.id);
+      this.$store.dispatch("addRecipe", { ...this.$data });
     }
   }
 };
