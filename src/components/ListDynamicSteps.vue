@@ -9,7 +9,7 @@
         <p
           class="editable"
           :contenteditable="!locked"
-          @input.prevent="updateUncommitted({ value: $event.target.innerHTML}, idx)"
+          @input.prevent="updateUncommitted({ value: $event.target.innerText}, idx)"
           v-html="attrs.item.value"
         ></p>
       </lockable>
@@ -58,7 +58,7 @@ export default {
   methods: {
     itemAdd: function(e) {
       var payload = {
-        value: this.$refs.inputAdd.innerHTML
+        value: this.$refs.inputAdd.innerText
       };
       this.$emit("item-add", payload);
       this.$refs.inputAdd.innerHTML = "";
@@ -126,9 +126,7 @@ p[contenteditable="false"]
       margin-right: .4rem
 
 .editable
-  max-width: 100%
-  word-wrap: break-word
-  min-height: 1.2rem
+  @include mixins.editable
   @include mixins.default-form-input
 
 .list-dynamic-control
