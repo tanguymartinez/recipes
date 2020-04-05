@@ -41,6 +41,7 @@ export default {
 @use "../assets/mixins"
 .list-dynamic-control
   display: flex
+  justify-content: space-between
   align-items: center
   >*
     margin-left: .5rem
@@ -58,4 +59,6 @@ export default {
   flex-direction: row
   justify-content: space-between
   align-items: center
+  &:last-child
+    margin-bottom: 1rem
 </style>
