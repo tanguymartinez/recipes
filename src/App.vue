@@ -33,7 +33,6 @@ body
   padding: 30px;
   border-radius: 0 0 20px 20px;
   background-color: black;
-  width: 30%;
   margin: auto;
   color: white;
   margin-bottom: 3rem;
