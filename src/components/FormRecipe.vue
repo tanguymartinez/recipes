@@ -49,6 +49,21 @@ export default {
     ListDynamicIngredients,
     InputText
   },
+  mounted: function() {
+    if (!this.$route.params.id) {
+      return;
+    }
+    var recipe = this.$store.state.recipes.find(
+      function(recipe) {
+        return recipe.id == this.$route.params.id;
+      }.bind(this)
+    );
+    Object.keys(recipe).forEach((key, idx, arr) => {
+      if (this.$data.hasOwnProperty(key)) {
+        this[key] = recipe[key];
+      }
+    });
+  },
   methods: {
     log: console.log,
     addItem: function(name, collection) {
@@ -75,8 +90,21 @@ export default {
       this[collection].splice(idx, 1);
     },
     save: function() {
-      this.id = parseInt(localStorage.getItem("id")) + 1;
-      this.$store.dispatch("addRecipe", { ...this.$data });
+      if (this.id == null) {
+        this.id = parseInt(localStorage.getItem("id")) + 1;
+        this.$store.dispatch("addRecipe", { ...this.$data });
+      } else {
+        var idx = this.$store.state.recipes.findIndex(
+          function(recipe) {
+            return recipe.id == this.$route.params.id;
+          }.bind(this)
+        );
+        this.$store.dispatch("modifyRecipe", {
+          idx,
+          recipe: { ...this.$data }
+        });
+      }
+      this.$router.go(-1);
     }
   }
 };

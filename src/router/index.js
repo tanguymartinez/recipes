@@ -24,6 +24,11 @@ const routes = [
     component: ShowRecipe
   },
   {
+    path: '/recipe/:id/edit',
+    name: 'recipe-edit',
+    component: FormRecipe
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting

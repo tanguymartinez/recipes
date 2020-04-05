@@ -7,7 +7,10 @@
         <div class="div-fill">
           <img class="arrow-next" src="../assets/img/arrow-next.svg" alt="right arrow" />
         </div>
-        <router-link class="link-recipe" :to="{ name: 'recipe', params: { id: recipe.id }}"></router-link>
+        <router-link
+          class="link-recipe"
+          :to="{ name: 'recipe', params: { id: recipe.id, back: true }}"
+        ></router-link>
       </div>
     </div>
   </div>
@@ -57,7 +60,7 @@ export default {
       cursor: pointer
       transform: scale(1.05)
       .div-fill
-        transform: translateX(calc( 2rem ))
+        transform: translateX(calc( 2.5rem ))
         opacity: 1
     *:last-child
       align-self: flex-end
@@ -72,12 +75,12 @@ export default {
       transition: all 200ms ease-in
       position: absolute
       left: calc( 100% - 4.5rem )
-      height: 2rem
+      height: 1.5rem
       opacity: 0
       transform: translateX(0)
       top: calc( 100% - 2.5rem )
     .arrow-next
-      width: 2rem
+      width: 1.5rem
   #container-recipes
     color: #2ec2c9
     display: grid

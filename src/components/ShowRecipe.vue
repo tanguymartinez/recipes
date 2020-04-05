@@ -1,5 +1,7 @@
 <template>
   <div>
+    <router-link :to="{ name: 'recipe-edit', params: { id: $route.params.id} }">Edit</router-link>
+    <button-back v-if="$route.params.back" />
     <h1>{{ recipe.name }}</h1>
     <p>{{ recipe.description }}</p>
     <h2>Ingredients:</h2>
@@ -25,6 +27,7 @@
 </template>
 
 <script>
+import ButtonBack from "./ButtonBack";
 export default {
   data: function() {
     return {
@@ -37,25 +40,29 @@ export default {
         return recipe.id == this.$route.params.id;
       }.bind(this)
     );
+  },
+  components: {
+    ButtonBack
   }
 };
 </script>
 <style lang="sass" scoped>
 *
-    text-align: left
+  text-align: left
 ul, ol
-    text-align: left
-    li
-        >div
-            display: flex
-            justify-content: space-between
-            p
-                margin: 0
-                margin-bottom: 1rem
+  text-align: left
+  li
+    >div
+      display: flex
+      justify-content: space-between
+      p
+        margin: 0
+        margin-bottom: 1rem
         &:last-of-type
-            p
-                margin: 0
+          p
+            margin: 0
+h1
+  text-align: center
 h2
-    text-align: left
-    margin-top: 2rem
+  margin-top: 2rem
 </style>
