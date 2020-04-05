@@ -43,4 +43,8 @@ export default {
   opacity: 0;
   transform: translateX(6rem);
 }
+ol,
+ul {
+  margin: 0;
+}
 </style>
