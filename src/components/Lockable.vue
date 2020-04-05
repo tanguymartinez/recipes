@@ -46,7 +46,6 @@ export default {
 </script>
 <style lang="sass" scoped>
 @use "../assets/mixins"
-*
 .lockable
   display: flex
   align-items: center
