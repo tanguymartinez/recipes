@@ -4,14 +4,12 @@
       <lockable
         v-slot:default="{ attrs, locked }"
         :attrs="{ item, idx, updateUncommitted: updateUncommitted.bind(this) }"
-        @locking="itemModify(idx)"
       >
-        <p
-          class="editable"
-          :contenteditable="!locked"
-          @input.prevent="updateUncommitted({ value: $event.target.innerText}, idx)"
-          v-html="attrs.item.value"
-        ></p>
+        <input-text
+          :unlocked="!locked"
+          :value="attrs.item.value"
+          @input="itemModify({value: $event}, idx)"
+        />
       </lockable>
     </template>
     <template #buttonRemove="{ idx }">
@@ -23,7 +21,7 @@
       />
     </template>
     <template #input>
-      <p class="editable" ref="inputAdd" contenteditable="true"></p>
+      <input-text :value="textAdd" @input="textAdd = $event" />
     </template>
     <template #buttonAdd>
       <img class="button-add" src="../assets/img/add.svg" alt="add icon" @click.prevent="itemAdd" />
@@ -34,10 +32,12 @@
 <script>
 import ListDynamic from "./ListDynamic";
 import Lockable from "./Lockable";
+import InputText from "./InputText";
 export default {
   data: function() {
     return {
-      uncommitted: new Map()
+      uncommitted: new Map(),
+      textAdd: ""
     };
   },
 
@@ -58,20 +58,17 @@ export default {
   methods: {
     itemAdd: function(e) {
       var payload = {
-        value: this.$refs.inputAdd.innerText
+        value: this.textAdd
       };
       this.$emit("item-add", payload);
-      this.$refs.inputAdd.innerHTML = "";
+      this.textAdd = "";
     },
     itemRemove: function(idx) {
       this.$emit("item-remove", idx);
     },
-    itemModify: function(idx) {
-      if (!this.uncommitted.has(idx)) {
-        return;
-      }
-      this.$emit("item-modify", { newValue: this.uncommitted.get(idx), idx });
-      this.uncommitted.delete(idx);
+    itemModify: function(change, idx) {
+      var result = { ...this.items[idx], ...change };
+      this.$emit("item-modify", { newValue: result, idx });
     },
     updateUncommitted: function(change, idx) {
       var result;
@@ -89,7 +86,8 @@ export default {
   },
   components: {
     ListDynamic,
-    Lockable
+    Lockable,
+    InputText
   }
 };
 </script>

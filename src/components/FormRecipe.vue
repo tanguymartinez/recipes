@@ -1,11 +1,11 @@
 <template>
   <div>
     <form action>
-      <label for="name">Name:</label>
+      <label for="name">Name</label>
       <input type="text" name="name" id="name" v-model="name" />
-      <label for="description">Description:</label>
-      <textarea-auto :value="description" @input="description = $event" />
-      <label for="ingredients">Ingredients:</label>
+      <label for="description">Description</label>
+      <input-text :value="description" @input="description = $event" />
+      <label for="ingredients">Ingredients</label>
       <list-dynamic-ingredients
         :items="ingredients"
         placeholder="Additional ingredient..."
@@ -13,7 +13,7 @@
         @item-remove="ingredients.splice($event, 1)"
         @item-modify="ingredients.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-ingredients>
-      <label for="instructions">Instructions:</label>
+      <label for="instructions">Instructions</label>
       <list-dynamic-steps
         :items="instructions"
         :ordered="true"
@@ -21,8 +21,8 @@
         @item-remove="instructions.splice($event, 1)"
         @item-modify="instructions.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-steps>
-      <label for="notes">Notes:</label>
-      <textarea name="notes" id="notes" cols="30" rows="10" v-model="notes"></textarea>
+      <label for="notes">Notes</label>
+      <input-text :value="notes" @input="notes = $event" />
       <input type="submit" value="Save" @click.prevent="save" />
     </form>
   </div>
@@ -31,7 +31,7 @@
 <script>
 import ListDynamicSteps from "./ListDynamicSteps";
 import ListDynamicIngredients from "./ListDynamicIngredients";
-import TextareaAuto from "./TextareaAuto";
+import InputText from "./InputText";
 
 export default {
   data: function() {
@@ -47,7 +47,7 @@ export default {
   components: {
     ListDynamicSteps,
     ListDynamicIngredients,
-    TextareaAuto
+    InputText
   },
   methods: {
     log: console.log,

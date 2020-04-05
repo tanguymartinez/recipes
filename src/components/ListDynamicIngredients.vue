@@ -46,14 +46,14 @@
       <input
         ref="inputAddIngredient"
         type="text"
-        placeholder="Additional ingredient..."
+        placeholder="Ingredient"
         @keydown.enter.prevent="itemAdd"
       />
       x
       <input
         ref="inputAddQuantity"
         type="number"
-        placeholder="Quantity ..."
+        placeholder="Quantity"
         @keydown.enter.prevent="itemAdd"
       />
       <select ref="inputAddUnit" @keydown.enter.prevent="itemAdd">
