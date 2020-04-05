@@ -43,12 +43,10 @@ export default {
     position: relative
     margin: 1rem
     background-color: #fcf451
-    // background-color: #6dd6e8
     border-radius: 10px
     min-height: 6rem
     min-width: 6rem
     padding: 1rem
-    box-shadow: 0 0 0px #17a1bd
     display: flex
     flex-direction: column
     justify-content: space-between
