@@ -6,7 +6,7 @@
       <router-link :to="{name : 'about'}">ABOUT</router-link>
     </div>
     <transition name="router-view" mode="out-in">
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </transition>
   </div>
 </template>
@@ -27,6 +27,9 @@ body
   width: 50%;
   min-width: 35rem;
   margin: auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-bottom: 2rem;
 }
 
 #nav {

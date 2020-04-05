@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button-back v-if="$route.params.back" />
     <form action>
       <label for="name">Name</label>
       <input type="text" name="name" id="name" v-model="name" />
@@ -32,6 +33,7 @@
 import ListDynamicSteps from "./ListDynamicSteps";
 import ListDynamicIngredients from "./ListDynamicIngredients";
 import InputText from "./InputText";
+import ButtonBack from "./ButtonBack";
 
 export default {
   data: function() {
@@ -47,7 +49,8 @@ export default {
   components: {
     ListDynamicSteps,
     ListDynamicIngredients,
-    InputText
+    InputText,
+    ButtonBack
   },
   mounted: function() {
     if (!this.$route.params.id) {

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'recipe-edit', params: { id: $route.params.id} }">Edit</router-link>
-    <button-back v-if="$route.params.back" />
+    <button-navigate value="Home" :to="{name: 'home'}" direction="left" />
     <h1>{{ recipe.name }}</h1>
     <p>{{ recipe.description }}</p>
     <h2>Ingredients:</h2>
@@ -23,11 +22,16 @@
     </ol>
     <h2>Notes:</h2>
     <p>{{ recipe.notes }}</p>
+    <button-navigate
+      value="Edit"
+      direction="right"
+      :to="{ name: 'recipe-edit', params: { id: $route.params.id, back: true} }"
+    />
   </div>
 </template>
 
 <script>
-import ButtonBack from "./ButtonBack";
+import ButtonNavigate from "./ButtonNavigate";
 export default {
   data: function() {
     return {
@@ -42,7 +46,7 @@ export default {
     );
   },
   components: {
-    ButtonBack
+    ButtonNavigate
   }
 };
 </script>

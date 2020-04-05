@@ -51,6 +51,7 @@
       />
       x
       <input
+        class="input-add-quantity"
         ref="inputAddQuantity"
         type="number"
         placeholder="Quantity"
@@ -164,12 +165,13 @@ input:disabled
     &:last-child
       margin-left: 1rem
       margin-right: 0
-.input-quantity
-  width: 3rem
+.input-quantity, .input-add-quantity
+  width: 4.5rem
 
 [class^="button"]
   @include mixins.button
 
 [class*="button-add"], [class*="button-remove"]
+  margin: 0
   @include mixins.hover-rotate-half
 </style>

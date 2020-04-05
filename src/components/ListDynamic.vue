@@ -43,6 +43,7 @@ export default {
   display: flex
   justify-content: space-between
   align-items: center
+  flex-wrap: wrap
   >*
     margin-left: .5rem
     margin-right: .5rem

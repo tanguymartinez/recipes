@@ -136,5 +136,6 @@ p[contenteditable="false"]
   @include mixins.button
 
 [class*="button-add"], [class*="button-remove"]
+  margin: 0
   @include mixins.hover-rotate-half
 </style>
