@@ -26,7 +26,7 @@
       <input-text :value="recipe.notes" @input="notes = $event" />
       <input type="submit" value="Save" @click.prevent="save" />
     </form>
-    <a class="button-destroy" @click.prevent="destroy" v-if="recipe.id != null">Delete</a>
+    <a class="button-destroy" @click.prevent="destroy" v-if="!isNew">Delete</a>
   </div>
 </template>
 
@@ -46,7 +46,8 @@ export default {
         ingredients: [],
         instructions: [],
         notes: ""
-      }
+      },
+      isNew: false
     };
   },
   components: {
@@ -57,6 +58,7 @@ export default {
   },
   mounted: function() {
     if (!this.$route.params.id) {
+      this.isNew = true;
       return;
     }
     var recipe = this.$store.state.recipes.find(
