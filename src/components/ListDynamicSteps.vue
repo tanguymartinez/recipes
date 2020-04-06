@@ -124,8 +124,8 @@ p[contenteditable="false"]
       margin-right: .4rem
 
 .editable
-  @include mixins.editable
   @include mixins.default-form-input
+  @include mixins.editable
 
 .list-dynamic-control
   p

@@ -132,8 +132,6 @@ export default {
 @include mixins.default-form
 .editable
   text-align: left
-  @include mixins.default-form-input
-  @include mixins.editable
 
 .button-destroy
   font-family: Avenir, Helvetica, Arial, sans-serif
