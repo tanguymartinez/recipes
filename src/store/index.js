@@ -15,6 +15,9 @@ export default new Vuex.Store({
     modifyRecipe: function (state, payload) {
       state.recipes[payload.idx] = payload.recipe;
     },
+    deleteRecipe: function (state, payload) {
+      state.recipes.splice(payload.idx, 1);
+    },
     setRecipes: function (state, recipes) {
       state.recipes = recipes;
     }
@@ -30,6 +33,13 @@ export default new Vuex.Store({
     },
     modifyRecipe: function (context, payload) {
       context.commit('modifyRecipe', payload);
+      localStorage.setItem(
+        "recipes",
+        JSON.stringify(context.state.recipes)
+      );
+    },
+    deleteRecipe: function (context, payload) {
+      context.commit('deleteRecipe', payload);
       localStorage.setItem(
         "recipes",
         JSON.stringify(context.state.recipes)

@@ -9,26 +9,16 @@
         margin-bottom: 1rem
         font-weight: bold
         text-align: left
+
+    input[type="submit"]
+        @include default-form-input-submit
+
     input, textarea, [contenteditable="true"]
         padding: .2rem
         @include default-form-input
 
     textarea
         resize: none
-
-    input[type="submit"]
-        background-color: #fcf451
-        margin-top: 2rem
-        border: 0
-        border-radius: 10px
-        transition: all 200ms
-        width: 5rem
-        height: 3rem
-        align-self: center
-        &:hover
-            cursor: pointer
-            box-shadow: 0 0 10px #2ec2c9
-            transform: scale(1.05)
 
     .list-dynamic
         text-align: left
@@ -46,6 +36,21 @@
     transition: all 150ms
     &:focus
         border-bottom: 2px solid #055eed
+
+@mixin default-form-input-submit
+    font-family: Avenir, Helvetica, Arial, sans-serif
+    background-color: #fcf451
+    margin-top: 2rem
+    border: 0
+    border-radius: 10px
+    transition: all 200ms
+    width: 5rem
+    height: 3rem
+    align-self: center
+    &:hover
+        cursor: pointer
+        box-shadow: 0 0 10px #2ec2c9
+        transform: scale(1.05)
 
 @mixin input-disabled
     background-color: #1ed6ab70

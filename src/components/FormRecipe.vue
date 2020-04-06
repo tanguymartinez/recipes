@@ -26,6 +26,7 @@
       <input-text :value="notes" @input="notes = $event" />
       <input type="submit" value="Save" @click.prevent="save" />
     </form>
+    <a class="button-destroy" @click.prevent="destroy">Delete</a>
   </div>
 </template>
 
@@ -108,6 +109,15 @@ export default {
         });
       }
       this.$router.go(-1);
+    },
+    destroy: function(idx) {
+      if (!confirm("Delete?")) {
+        return;
+      }
+      this.$store.dispatch("deleteRecipe", {
+        idx
+      });
+      this.$router.push({ name: "home" });
     }
   }
 };
@@ -120,4 +130,21 @@ export default {
   text-align: left
   @include mixins.default-form-input
   @include mixins.editable
+
+.button-destroy
+  font-family: Avenir, Helvetica, Arial, sans-serif
+  background-color: #e04d2f
+  display: inline-block
+  line-height: 3rem
+  margin-top: 2rem
+  border: 0
+  border-radius: 10px
+  transition: all 200ms
+  width: 5rem
+  height: 3rem
+  align-self: center
+  &:hover
+    cursor: pointer
+    box-shadow: 0 0 10px #2ec2c9
+    transform: scale(1.05)
 </style>
