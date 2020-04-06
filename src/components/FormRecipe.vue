@@ -3,30 +3,30 @@
     <button-back v-if="$route.params.back" />
     <form action>
       <label for="name">Name</label>
-      <input type="text" name="name" id="name" v-model="name" />
+      <input type="text" name="name" id="name" v-model="recipe.name" />
       <label for="description">Description</label>
-      <input-text :value="description" @input="description = $event" />
+      <input-text :value="recipe.description" @input="description = $event" />
       <label for="ingredients">Ingredients</label>
       <list-dynamic-ingredients
-        :items="ingredients"
+        :items="recipe.ingredients"
         placeholder="Additional ingredient..."
-        @item-add="ingredients.push($event)"
-        @item-remove="ingredients.splice($event, 1)"
-        @item-modify="ingredients.splice($event.idx, 1, $event.newValue)"
+        @item-add="recipe.ingredients.push($event)"
+        @item-remove="recipe.ingredients.splice($event, 1)"
+        @item-modify="recipe.ingredients.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-ingredients>
       <label for="instructions">Instructions</label>
       <list-dynamic-steps
-        :items="instructions"
+        :items="recipe.instructions"
         :ordered="true"
-        @item-add="instructions.push($event)"
-        @item-remove="instructions.splice($event, 1)"
-        @item-modify="instructions.splice($event.idx, 1, $event.newValue)"
+        @item-add="recipe.instructions.push($event)"
+        @item-remove="recipe.instructions.splice($event, 1)"
+        @item-modify="recipe.instructions.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-steps>
       <label for="notes">Notes</label>
-      <input-text :value="notes" @input="notes = $event" />
+      <input-text :value="recipe.notes" @input="notes = $event" />
       <input type="submit" value="Save" @click.prevent="save" />
     </form>
-    <a class="button-destroy" @click.prevent="destroy">Delete</a>
+    <a class="button-destroy" @click.prevent="destroy" v-if="recipe.id != null">Delete</a>
   </div>
 </template>
 
@@ -39,12 +39,14 @@ import ButtonBack from "./ButtonBack";
 export default {
   data: function() {
     return {
-      id: null,
-      name: "",
-      description: "",
-      ingredients: [],
-      instructions: [],
-      notes: ""
+      recipe: {
+        id: null,
+        name: "",
+        description: "",
+        ingredients: [],
+        instructions: [],
+        notes: ""
+      }
     };
   },
   components: {
@@ -63,8 +65,8 @@ export default {
       }.bind(this)
     );
     Object.keys(recipe).forEach((key, idx, arr) => {
-      if (this.$data.hasOwnProperty(key)) {
-        this[key] = recipe[key];
+      if (this.recipe.hasOwnProperty(key)) {
+        this.recipe[key] = recipe[key];
       }
     });
   },
@@ -94,9 +96,9 @@ export default {
       this[collection].splice(idx, 1);
     },
     save: function() {
-      if (this.id == null) {
-        this.id = parseInt(localStorage.getItem("id")) + 1;
-        this.$store.dispatch("addRecipe", { ...this.$data });
+      if (this.recipe.id == null) {
+        this.recipe.id = parseInt(localStorage.getItem("id")) + 1;
+        this.$store.dispatch("addRecipe", this.recipe);
       } else {
         var idx = this.$store.state.recipes.findIndex(
           function(recipe) {
@@ -105,7 +107,7 @@ export default {
         );
         this.$store.dispatch("modifyRecipe", {
           idx,
-          recipe: { ...this.$data }
+          recipe: this.recipe
         });
       }
       this.$router.go(-1);
