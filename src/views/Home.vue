@@ -60,7 +60,7 @@ export default {
       cursor: pointer
       transform: scale(1.05)
       .div-fill
-        transform: translateX(calc( 2.5rem ))
+        transform: translateX(2.5rem)
         opacity: 1
     *:last-child
       align-self: flex-end
