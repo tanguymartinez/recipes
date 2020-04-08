@@ -2,12 +2,9 @@
   <div class="container-list" ref="list" @touchstart="touchInit" @touchend="swipe">
     <transition-group :name="fadeDirection" tag="div" class="list">
       >
-      <div
-        v-for="widget in activeWidgets"
-        :key="widget.id"
-        class="widget"
-        ref="widgets"
-      >{{ widget.value }}</div>
+      <div v-for="widget in activeWidgets" :key="widget.id" class="widget" ref="widgets">
+        <slot :item="widget[widgetKey]"></slot>
+      </div>
     </transition-group>
   </div>
 </template>
@@ -19,39 +16,31 @@ export default {
       gesture: {
         start: {}
       },
-      values: ["Pomme", "Poire", "Cassis", "Framboise", "Pêche"],
+      widgetKey: Symbol("widget key"),
       widgets: [],
       displayed: [],
       activeWidgets: [],
       fadeDirection: "bottom"
     };
   },
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
   mounted: function() {
-    this.widgets = this.values.map((value, idx) => ({
-      id: idx,
-      value
-    }));
-    this.activeWidgets = this.widgets.slice(0, 3);
-    this.show(this.activeWidgets);
+    this.$nextTick(
+      function() {
+        this.widgets = this.items.map((value, idx) => ({
+          id: idx,
+          [this.widgetKey]: value
+        }));
+        this.activeWidgets = this.widgets.slice(0, 3);
+      }.bind(this)
+    );
   },
   methods: {
-    show: function(widgets) {
-      widgets.forEach(
-        function(widget) {
-          widget.show = true;
-        }.bind(this)
-      );
-    },
-    hide: function(widgets) {
-      widgets.forEach(
-        function(widget) {
-          widget.show = false;
-        }.bind(this)
-      );
-    },
-    widget: function(n) {
-      return this.$refs.widgets[n];
-    },
     unify: function(e) {
       return e.changedTouches ? e.changedTouches[0] : e;
     },
