@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import FormRecipe from '../components/FormRecipe';
 import ShowRecipe from '../components/ShowRecipe';
+import Recipe from '../components/Recipe';
 import store from '../store/index';
 
 Vue.use(VueRouter)
@@ -21,7 +22,7 @@ const routes = [
   {
     path: '/recipe/:id',
     name: 'recipe',
-    component: ShowRecipe
+    component: Recipe
   },
   {
     path: '/recipe/:id/edit',
