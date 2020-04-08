@@ -8,6 +8,15 @@ export default new Vuex.Store({
     recipes: [],
     id: null
   },
+  getters: {
+    getRecipeById: (state) => (id) => {
+      return state.recipes.find(
+        function (recipe) {
+          return recipe.id == id;
+        }
+      );
+    }
+  },
   mutations: {
     addRecipe: function (state, recipe) {
       state.recipes.push(recipe);
