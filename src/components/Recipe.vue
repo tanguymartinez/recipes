@@ -1,9 +1,11 @@
 <template>
   <div>
     <button @click="change">Change</button>
-    <keep-alive include="RunRecipe">
-      <component :is="componentName"></component>
-    </keep-alive>
+    <transition name="recipe-tab" mode="out-in">
+      <keep-alive include="RunRecipe">
+        <component :is="componentName"></component>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
@@ -31,5 +33,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass" scoped>
+.recipe-tab-enter-active,
+.recipe-tab-leave-active
+  transition: all 200ms
+
+.recipe-tab-enter,.recipe-tab-leave-to
+  opacity: 0
+
+.recipe-tab-enter
+  transform: translateX(-2rem)
+
+.recipe-tab-leave-to
+  transform: translateX(-2rem)
 </style>
