@@ -2,7 +2,12 @@
   <div class="container-list" ref="list" @touchstart="touchInit" @touchend="swipe">
     <transition-group :name="fadeDirection" tag="div" class="list">
       >
-      <div v-for="widget in activeWidgets" :key="widget.id" class="widget" ref="widgets">
+      <div
+        v-for="(widget, idx) in activeWidgets"
+        :key="widget.id"
+        :class="[{ active: isActive(widget.id, idx) }, 'widget']"
+        ref="widgets"
+      >
         <slot :item="widget[widgetKey]"></slot>
       </div>
     </transition-group>
@@ -36,7 +41,7 @@ export default {
           id: idx,
           [this.widgetKey]: value
         }));
-        this.activeWidgets = this.widgets.slice(0, 3);
+        this.activeWidgets = this.widgets.slice(0, 2);
       }.bind(this)
     );
   },
@@ -67,8 +72,8 @@ export default {
     moveDown: function() {
       var leftBound = this.activeWidgets[0].id;
       if (
-        !(leftBound == 0 && this.activeWidgets.length < 3) &&
-        leftBound < this.widgets.length - 1
+        !(leftBound == 0 && this.activeWidgets.length < 3) && // 3 is the length of the displayed list
+        leftBound < this.widgets.length - 2 // -1 for 1 minimum item, -2 for 2 etc...
       ) {
         leftBound += 1;
       }
@@ -85,9 +90,12 @@ export default {
       var rightBound = this.activeWidgets[this.activeWidgets.length - 1].id;
       if (
         !(
-          rightBound == this.widgets.length - 1 && this.activeWidgets.length < 3
+          (
+            rightBound == this.widgets.length - 1 &&
+            this.activeWidgets.length < 3
+          ) // 3 is the length of the displayed list
         ) &&
-        rightBound > 0
+        rightBound > 1 // 0 for 1 minimum item, 1 for 2 etc...
       ) {
         rightBound -= 1;
       }
@@ -96,6 +104,16 @@ export default {
         leftBound -= 1;
       }
       this.activeWidgets = this.widgets.slice(leftBound, rightBound + 1);
+    },
+    isActive: function(id, idx) {
+      if (this.activeWidgets.length == 3) {
+        // if everything shown set the middle active
+        return idx == 1;
+      } else if (id == 0 || id == this.widgets.length - 1) {
+        // else if we're on either end of the widgets array
+        return true;
+      }
+      return false;
     }
   }
 };
@@ -107,6 +125,7 @@ export default {
   display: flex
   justify-content: center
 .list
+  padding-top: 3rem
   display: flex
   align-items: center
   flex-direction: column
@@ -126,10 +145,12 @@ export default {
   left: 0
 .fade-bottom-leave-active
   position: absolute
-  transform: translateY(-50px) scale(0)
-
+  transform: translateY(-6rem)
 .fade-top-enter, .fade-top-leave-to
   opacity: 0
 .fade-bottom-enter, .fade-bottom-leave-to
   opacity: 0
+
+.active
+  background-color: red
 </style>
