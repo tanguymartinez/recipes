@@ -145,7 +145,8 @@ export default {
   min-width: 18rem
   position: relative
 .widget
-  background-color: #2ec2c9
+  background-color: #fca151
+  color: #383838
   border-radius: 5px
   transition: all .4s
   padding: .7rem
@@ -175,7 +176,7 @@ export default {
   transform: translate(6rem, 3rem)
 
 .active
-  box-shadow: 0 0 10px black
-  transition: transform .6s
-  transform: scale(1.2)
+  box-shadow: 0 0 40px 5px #2ec95c
+  transition: all .6s
+  transform: scale(1.05)
 </style>
