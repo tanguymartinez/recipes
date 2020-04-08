@@ -14,7 +14,7 @@ export default {
   data: function() {
     return {
       idx: 0,
-      componentName: "RunRecipe",
+      componentName: "ShowRecipe",
       componentNames: ["RunRecipe", "ShowRecipe"]
     };
   },
