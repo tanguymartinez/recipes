@@ -108,17 +108,25 @@ export default {
   display: flex
   align-items: center
   flex-direction: column
-  div
-    transition: all 250ms
-    padding: 2rem
-    display: flex
+  position: relative
+.widget
+  background-color: #2ec2c9
+  width: 70%
+  min-width: 18rem
+  border-radius: 5px
+  transition: all 250ms
+  padding: .7rem
+  display: flex
+  margin: 1rem 0
+
+.fade-bottom-move
+  left: 0
 .fade-bottom-leave-active
   position: absolute
+  transform: translateY(-50px) scale(0)
+
 .fade-top-enter, .fade-top-leave-to
   opacity: 0
 .fade-bottom-enter, .fade-bottom-leave-to
   opacity: 0
-.fade-bottom-leave-active
-  transition: transform 1000ms
-  transform: translateY(-50px) scale(0)
 </style>
