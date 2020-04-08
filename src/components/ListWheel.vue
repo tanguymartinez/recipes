@@ -76,31 +76,37 @@ export default {
       }
     },
     moveDown: function() {
-      if (this.activeWidgets[0].id == this.widgets.length - 2) {
-        return;
+      var leftBound = this.activeWidgets[0].id;
+      if (
+        !(leftBound == 0 && this.activeWidgets.length < 3) &&
+        leftBound < this.widgets.length - 1
+      ) {
+        leftBound += 1;
       }
-      var leftBound =
-        this.activeWidgets[0].id + (this.activeWidgets.length < 3 ? 0 : 1);
-      this.activeWidgets = this.widgets.slice(
-        leftBound,
-        this.activeWidgets[this.activeWidgets.length - 1].id + 2
-      );
+      var rightBound = this.activeWidgets[this.activeWidgets.length - 1].id;
+      if (
+        this.activeWidgets[this.activeWidgets.length - 1].id <
+        this.widgets.length
+      ) {
+        rightBound += 1;
+      }
+      this.activeWidgets = this.widgets.slice(leftBound, rightBound + 1);
     },
     moveUp: function() {
-      function positive(nb) {
-        return nb >= 0 ? nb : 0;
+      var rightBound = this.activeWidgets[this.activeWidgets.length - 1].id;
+      if (
+        !(
+          rightBound == this.widgets.length - 1 && this.activeWidgets.length < 3
+        ) &&
+        rightBound > 0
+      ) {
+        rightBound -= 1;
       }
-      if (this.activeWidgets[this.activeWidgets.length - 1].id == 1) {
-        return;
+      var leftBound = this.activeWidgets[0].id;
+      if (this.activeWidgets[0].id > 0) {
+        leftBound -= 1;
       }
-      var rightBound =
-        this.activeWidgets[this.activeWidgets.length - 1].id -
-        (this.activeWidgets.length < 3 ? 0 : 1) +
-        1;
-      this.activeWidgets = this.widgets.slice(
-        positive(this.activeWidgets[0].id - 1),
-        rightBound
-      );
+      this.activeWidgets = this.widgets.slice(leftBound, rightBound + 1);
     }
   }
 };
