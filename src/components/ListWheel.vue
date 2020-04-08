@@ -32,6 +32,18 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    maxLength: {
+      type: Number,
+      default: 3
+    },
+    minLength: {
+      type: Number,
+      default: 2
+    },
+    startLength: {
+      type: Number,
+      default: 2
     }
   },
   mounted: function() {
@@ -41,7 +53,7 @@ export default {
           id: idx,
           [this.widgetKey]: value
         }));
-        this.activeWidgets = this.widgets.slice(0, 2);
+        this.activeWidgets = this.widgets.slice(0, this.startLength);
       }.bind(this)
     );
   },
@@ -72,8 +84,8 @@ export default {
     moveDown: function() {
       var leftBound = this.activeWidgets[0].id;
       if (
-        !(leftBound == 0 && this.activeWidgets.length < 3) && // 3 is the length of the displayed list
-        leftBound < this.widgets.length - 2 // -1 for 1 minimum item, -2 for 2 etc...
+        !(leftBound == 0 && this.activeWidgets.length < this.maxLength) && // 3 is the length of the displayed list
+        leftBound < this.widgets.length - this.minLength // -1 for 1 minimum item, -2 for 2 etc...
       ) {
         leftBound += 1;
       }
@@ -92,10 +104,10 @@ export default {
         !(
           (
             rightBound == this.widgets.length - 1 &&
-            this.activeWidgets.length < 3
+            this.activeWidgets.length < this.maxLength
           ) // 3 is the length of the displayed list
         ) &&
-        rightBound > 1 // 0 for 1 minimum item, 1 for 2 etc...
+        rightBound > this.minLength - 1 // 0 for 1 minimum item, 1 for 2 etc...
       ) {
         rightBound -= 1;
       }
