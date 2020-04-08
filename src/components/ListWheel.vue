@@ -147,22 +147,35 @@ export default {
 .widget
   background-color: #2ec2c9
   border-radius: 5px
-  transition: all 250ms
+  transition: all .4s
   padding: .7rem
   display: flex
   margin: 1rem 0
   width: 100%
 
-.fade-bottom-move
-  left: 0
 .fade-bottom-leave-active
   position: absolute
-  transform: translateY(-6rem)
+
+.fade-bottom-enter, .fade-bottom-leave-to
+
+  opacity: 0
+.fade-bottom-enter // enter bottom
+  transform: translate(3rem, 3rem)
+
+.fade-bottom-leave-to // leave top
+  transform: translate(6rem, -6rem)
+
 .fade-top-enter, .fade-top-leave-to
   opacity: 0
-.fade-bottom-enter, .fade-bottom-leave-to
-  opacity: 0
+
+.fade-top-enter // enter top
+  transform: translate(6rem, -6rem)
+
+.fade-top-leave-to // leave bottom
+  transform: translate(6rem, 3rem)
 
 .active
-  background-color: red
+  box-shadow: 0 0 10px black
+  transition: transform .6s
+  transform: scale(1.2)
 </style>
