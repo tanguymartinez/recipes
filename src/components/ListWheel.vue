@@ -103,21 +103,24 @@ export default {
 
 <style lang="sass" scoped>
 //bottom
-
+.container-list
+  display: flex
+  justify-content: center
 .list
   display: flex
   align-items: center
   flex-direction: column
+  width: 70%
+  min-width: 18rem
   position: relative
 .widget
   background-color: #2ec2c9
-  width: 70%
-  min-width: 18rem
   border-radius: 5px
   transition: all 250ms
   padding: .7rem
   display: flex
   margin: 1rem 0
+  width: 100%
 
 .fade-bottom-move
   left: 0
