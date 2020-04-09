@@ -2,7 +2,8 @@
   <div ref="timer">
     <p>{{ current }}</p>
     <list-wheel :items="items">
-      <template v-slot:default="{item}">
+      <template v-slot:default="{item, idx}">
+        <p class="number">{{ idx + 1 }}</p>
         <p>{{item.value}}</p>
       </template>
     </list-wheel>
@@ -42,7 +43,12 @@ export default {
 ul
   list-style-type: none
   padding: 0
-
-.widget
-  transition: all 250ms
+  text-align: left
+p
+  margin: 0
+.number
+  height: 2rem
+  width: 2rem
+  font-size: 1.5rem
+  align-self: flex-start
 </style>
