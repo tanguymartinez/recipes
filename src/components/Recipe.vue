@@ -10,23 +10,27 @@
 </template>
 
 <script>
+import TodoRecipe from "./TodoRecipe";
 import ShowRecipe from "./ShowRecipe";
 import RunRecipe from "./RunRecipe";
 export default {
   data: function() {
     return {
       idx: 0,
+      count: 0,
       componentName: "ShowRecipe",
-      componentNames: ["RunRecipe", "ShowRecipe"]
+      componentNames: ["ShowRecipe", "TodoRecipe", "RunRecipe"]
     };
   },
   methods: {
     change: function() {
-      var idx = Math.abs(this.componentNames.indexOf(this.componentName) - 1);
+      this.count += 1;
+      var idx = this.count % 3;
       this.componentName = this.componentNames[idx];
     }
   },
   components: {
+    TodoRecipe,
     ShowRecipe,
     RunRecipe
   }
