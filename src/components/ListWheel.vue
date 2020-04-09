@@ -8,7 +8,7 @@
         :class="[{ active: isActive(widget.id, idx) }, 'widget']"
         ref="widgets"
       >
-        <slot :item="widget[widgetKey]"></slot>
+        <slot :item="widget[widgetKey]" :idx="widget.id"></slot>
       </div>
     </transition-group>
   </div>
@@ -145,21 +145,23 @@ export default {
   min-width: 18rem
   position: relative
 .widget
-  background-color: #fca151
-  color: #383838
+  background-color: #d4ff52
+  color: #29990c
   border-radius: 5px
   transition: all .4s
   padding: .7rem
   display: flex
   margin: 1rem 0
   width: 100%
+  align-items: center
 
 .fade-bottom-leave-active
   position: absolute
+  transition: all .4s
 
 .fade-bottom-enter, .fade-bottom-leave-to
-
   opacity: 0
+
 .fade-bottom-enter // enter bottom
   transform: translate(3rem, 3rem)
 
@@ -176,7 +178,9 @@ export default {
   transform: translate(6rem, 3rem)
 
 .active
-  box-shadow: 0 0 40px 5px #2ec95c
-  transition: all .6s
-  transform: scale(1.05)
+  box-shadow: 0 0 40px 5px #9fff85
+  transition: all .4s
+  width: 120%
+  font-size: 1.2rem
+  padding: .84rem
 </style>
