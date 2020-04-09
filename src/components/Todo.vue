@@ -1,11 +1,21 @@
 <template>
   <transition-group name="order" tag="ul">
     <li v-for="checked in checkedOrdered" :key="checked.id" class="checked">
-      <input type="checkbox" @click="change($event, checked.id)" />
+      <div class="checkbox-custom">
+        <input :id="'checked' + checked.id" type="checkbox" @click="change($event, checked.id)" />
+        <label :for="'checked' + checked.id"></label>
+      </div>
       <slot :item="checked[valueKey]"></slot>
     </li>
     <li v-for="unchecked in uncheckedOrdered" :key="unchecked.id">
-      <input type="checkbox" @click="change($event, unchecked.id)" />
+      <div class="checkbox-custom">
+        <input
+          :id="'unchecked' + unchecked.id"
+          type="checkbox"
+          @click="change($event, unchecked.id)"
+        />
+        <label :for="'unchecked' + unchecked.id"></label>
+      </div>
       <slot :item="unchecked[valueKey]"></slot>
     </li>
   </transition-group>
@@ -91,4 +101,28 @@ li
 
 .order-move
   transition: transform 200ms
+
+input[type=checkbox]
+  visibility: hidden
+
+.checkbox-custom
+  height: 1.78rem
+  width: 2rem
+  position: relative
+  margin: 0
+  margin-right: 1rem
+  border-radius: 4px
+  border: 3px solid #9534eb
+  label
+    display: block
+    width: 100%
+    height: 100%
+    transition: all .2s
+    cursor: pointer
+    position: absolute
+    z-index: 1
+    top: 0
+  input[type=checkbox]:checked + label
+    background-image: url('../assets/img/check.svg')
+    background-size: 100%
 </style>
