@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>New recipe</h1>
     <button-back v-if="$route.params.back" />
     <form action>
       <label for="name">Name</label>
@@ -130,6 +131,8 @@ export default {
 <style lang="sass" scoped>
 @use "../assets/mixins"
 @include mixins.default-form
+h1
+  font-family: Photoshoot, Avenir, Helvetica, Arial, sans-serif
 .editable
   text-align: left
 

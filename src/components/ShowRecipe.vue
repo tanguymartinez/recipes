@@ -51,6 +51,8 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
+h1
+  font-family: Photoshoot, Avenir, Helvetica, Arial, sans-serif
 *
   text-align: left
 ul, ol
