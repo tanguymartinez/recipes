@@ -13,6 +13,15 @@
         </div>
       </div>
     </transition-group>
+    <div class="list-control">
+      <img class="button-previous" src="../assets/img/arrow-up.svg" @click="moveUp" alt="arrow up" />
+      <img
+        class="button-next"
+        src="../assets/img/arrow-down.svg"
+        @click="moveDown"
+        alt="arrow down"
+      />
+    </div>
   </div>
 </template>
 
@@ -75,15 +84,14 @@ export default {
       var dy = this.unify(e).clientY - this.gesture.start.clientY;
       if (dy > 0) {
         console.log("swipe down");
-        this.fadeDirection = "fade-top";
         this.moveUp();
       } else {
-        this.fadeDirection = "fade-bottom";
         console.log("swipe up");
         this.moveDown();
       }
     },
     moveDown: function() {
+      this.fadeDirection = "fade-bottom";
       var leftBound = this.activeWidgets[0].id;
       if (
         !(leftBound == 0 && this.activeWidgets.length < this.maxLength) && // 3 is the length of the displayed list
@@ -101,6 +109,7 @@ export default {
       this.activeWidgets = this.widgets.slice(leftBound, rightBound + 1);
     },
     moveUp: function() {
+      this.fadeDirection = "fade-top";
       var rightBound = this.activeWidgets[this.activeWidgets.length - 1].id;
       if (
         !(
@@ -136,6 +145,7 @@ export default {
 <style lang="sass" scoped>
 //bottom
 .container-list
+  position: relative
   display: flex
   justify-content: center
 .list
@@ -187,7 +197,25 @@ export default {
   transition: all .4s
   padding: .7rem
   display: flex
-  margin: 1rem 0
+  margin: .7rem 0
   width: 100%
   align-items: center
+
+[class^="button"]
+  width: 2rem
+  transition: all 100ms
+  &:hover
+    cursor: pointer
+    transform: scale(.8)
+  &:first-of-type
+    margin-bottom: .5rem
+  &:last-of-type
+    margin-top: .5rem
+
+.list-control
+  position: absolute
+  right: 0
+  top: 3.5rem
+  display: flex
+  flex-direction: column
 </style>
