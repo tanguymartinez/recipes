@@ -75,6 +75,7 @@ export default {
     return {
       uncommitted: new Map(),
       units: [
+        "",
         "mL",
         "L",
         "g",
