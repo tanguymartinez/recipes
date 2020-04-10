@@ -14,9 +14,14 @@
       </div>
     </transition-group>
     <div class="list-control">
-      <img class="button-previous" src="../assets/img/arrow-up.svg" @click="moveUp" alt="arrow up" />
       <img
-        class="button-next"
+        :class="[endTop ? 'hide' : '', 'button-previous']"
+        src="../assets/img/arrow-up.svg"
+        @click="moveUp"
+        alt="arrow up"
+      />
+      <img
+        :class="[endBottom ? 'hide' : '','button-next']"
         src="../assets/img/arrow-down.svg"
         @click="moveDown"
         alt="arrow down"
@@ -55,6 +60,21 @@ export default {
     startLength: {
       type: Number,
       default: 2
+    }
+  },
+  computed: {
+    endTop: function() {
+      return (
+        this.activeWidgets[0].id == this.widgets[0].id &&
+        this.activeWidgets.length == this.minLength
+      );
+    },
+    endBottom: function() {
+      return (
+        this.activeWidgets[this.activeWidgets.length - 1].id ==
+          this.widgets[this.widgets.length - 1].id &&
+        this.activeWidgets.length == this.minLength
+      );
     }
   },
   mounted: function() {
@@ -208,9 +228,14 @@ export default {
     cursor: pointer
     transform: scale(.8)
   &:first-of-type
-    margin-bottom: .5rem
   &:last-of-type
-    margin-top: .5rem
+    margin-top: 1rem
+
+.hide
+  visibility: hidden
+  &:hover
+    cursor: cursor
+    pointer-events: none
 
 .list-control
   position: absolute
@@ -218,4 +243,6 @@ export default {
   top: 3.5rem
   display: flex
   flex-direction: column
+  img
+    width: 2rem
 </style>
