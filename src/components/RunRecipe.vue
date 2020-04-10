@@ -46,6 +46,8 @@ ul
   text-align: left
 p
   margin: 0
+  word-break: break-word
+  text-align: left
 .number
   height: 2rem
   width: 2rem

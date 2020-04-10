@@ -41,7 +41,7 @@ ul
   flex-direction: column
   align-items: center
   ::v-deep li
-    margin: 1rem 0
+    margin: 1rem 0 0 0
     min-width: 5rem
     width: 50%
     border-radius: 5px
