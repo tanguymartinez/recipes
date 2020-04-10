@@ -64,12 +64,18 @@ export default {
   },
   computed: {
     endTop: function() {
+      if (this.activeWidgets.length == 0 || this.widgets.length == 0) {
+        return;
+      }
       return (
         this.activeWidgets[0].id == this.widgets[0].id &&
         this.activeWidgets.length == this.minLength
       );
     },
     endBottom: function() {
+      if (this.activeWidgets.length == 0 || this.widgets.length == 0) {
+        return;
+      }
       return (
         this.activeWidgets[this.activeWidgets.length - 1].id ==
           this.widgets[this.widgets.length - 1].id &&
