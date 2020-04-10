@@ -123,6 +123,7 @@ input[type=checkbox]
     z-index: 1
     top: 0
   input[type=checkbox]:checked + label
-    background-image: url('../assets/img/check.svg')
+    background-image: url('../assets/img/tick.svg')
     background-size: 100%
+    background-repeat: no-repeat
 </style>
