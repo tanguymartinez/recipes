@@ -51,6 +51,9 @@ body
     }
   }
 }
+h1 {
+  font-size: 3rem;
+}
 </style>
 <style lang="sass" scoped>
 .router-view-enter-active,

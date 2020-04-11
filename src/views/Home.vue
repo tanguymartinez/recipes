@@ -64,6 +64,7 @@ export default {
   >h1
     font-family: "Photoshoot"
     text-align: center
+    font-size: 3rem
 .thumbnail-recipe
   overflow: hidden
   position: relative
