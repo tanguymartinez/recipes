@@ -4,7 +4,7 @@
     <button-back v-if="$route.params.back" />
     <form action>
       <label for="name">Name</label>
-      <input type="text" name="name" id="name" v-model="recipe.name" />
+      <input autocomplete="off" type="text" name="name" id="name" v-model="recipe.name" />
       <label for="description">Description</label>
       <input-text :value="recipe.description" @input="description = $event" />
       <label for="ingredients">Ingredients</label>
