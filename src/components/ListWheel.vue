@@ -233,7 +233,6 @@ export default {
   &:hover
     cursor: pointer
     transform: scale(.8)
-  &:first-of-type
   &:last-of-type
     margin-top: 1rem
 

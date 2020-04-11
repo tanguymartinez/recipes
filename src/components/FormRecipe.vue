@@ -150,6 +150,6 @@ h1
   align-self: center
   &:hover
     cursor: pointer
-    box-shadow: 0 0 10px #2ec2c9
+    box-shadow: 0 0 10px #cc2f3c
     transform: scale(1.05)
 </style>
