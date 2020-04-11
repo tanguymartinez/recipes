@@ -2,6 +2,7 @@
   <div class="home">
     <h1>My recipes</h1>
     <input class="input-search" type="text" placeholder="Search..." @input="search" />
+    <button-navigate :to="{name: 'new'}" v-if="recipes.length == 0" value="new" direction="right"></button-navigate>
     <div id="container-recipes">
       <div class="thumbnail-recipe" v-for="(recipe, idx) in filtered" :key="idx">
         <p>{{ recipe.name }}</p>
@@ -20,6 +21,7 @@
 <script>
 // @ is an alias to /src
 import { mapState } from "vuex";
+import ButtonNavigate from "../components/ButtonNavigate";
 
 export default {
   name: "Home",
@@ -31,7 +33,9 @@ export default {
   mounted: function() {
     this.filtered = this.recipes;
   },
-  components: {},
+  components: {
+    ButtonNavigate
+  },
   computed: {
     ...mapState(["recipes"])
   },

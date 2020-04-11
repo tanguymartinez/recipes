@@ -36,7 +36,6 @@ export default {
     transition: all 250ms
     width: 1.3rem
 .right
-  margin-left: auto
   padding-left: .1rem
   padding-right: .5rem
   p
@@ -49,7 +48,6 @@ export default {
     img
       transform: translateX(.5rem) scale(.8) rotate(180deg)
 .left
-  margin-right: auto
   padding-right: .1rem
   padding-left: .5rem
   p

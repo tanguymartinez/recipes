@@ -71,4 +71,6 @@ h1
   text-align: center
 h2
   margin-top: 2rem
+.link.right
+  margin-left: auto
 </style>
