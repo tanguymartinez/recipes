@@ -1,16 +1,12 @@
 <template>
   <list-dynamic :items="items">
     <template #item="{ item, idx }">
-      <lockable
-        v-slot:default="{ attrs, locked }"
-        :attrs="{ item, idx, updateUncommitted: updateUncommitted.bind(this) }"
-        @locking="itemModify(idx)"
-      >
+      <lockable v-slot:default="{ attrs, locked }" :attrs="{ item, idx }">
         <input
           type="text"
           class="input-value"
           :value="attrs.item.value"
-          @input.prevent="updateUncommitted({ value: $event.target.value }, idx)"
+          @input.prevent="itemModify({ value: $event.target.value }, idx)"
           @keydown.enter.prevent
           :disabled="locked"
         />
@@ -19,14 +15,14 @@
           type="number"
           class="input-quantity"
           :value="attrs.item.quantity"
-          @input.prevent="updateUncommitted({ quantity: $event.target.value }, idx)"
+          @input.prevent="itemModify({ quantity: $event.target.value }, idx)"
           @keydown.enter.prevent
           :disabled="locked"
         />
         <select
           class="input-unit"
           :value="attrs.item.unit"
-          @input.prevent="updateUncommitted({ unit: $event.target.value }, idx)"
+          @input.prevent="itemModify({ unit: $event.target.value }, idx)"
           @keydown.enter.prevent
           :disabled="locked"
         >
@@ -73,7 +69,6 @@ import Lockable from "./Lockable";
 export default {
   data: function() {
     return {
-      uncommitted: new Map(),
       units: [
         "",
         "mL",
@@ -114,26 +109,9 @@ export default {
     itemRemove: function(idx) {
       this.$emit("item-remove", idx);
     },
-    itemModify: function(idx) {
-      if (!this.uncommitted.has(idx)) {
-        return;
-      }
-
-      this.$emit("item-modify", { newValue: this.uncommitted.get(idx), idx });
-      this.uncommitted.delete(idx);
-    },
-    updateUncommitted: function(change, idx) {
-      var result;
-      if (this.uncommitted.has(idx)) {
-        result = {
-          ...this.items[idx],
-          ...this.uncommitted.get(idx),
-          ...change
-        };
-      } else {
-        result = { ...this.items[idx], ...change };
-      }
-      this.uncommitted.set(idx, result);
+    itemModify: function(change, idx) {
+      var result = { ...this.items[idx], ...change };
+      this.$emit("item-modify", { newValue: result, idx });
     }
   },
   components: {
