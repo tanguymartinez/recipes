@@ -1,10 +1,7 @@
 <template>
   <list-dynamic :items="items" :ordered="ordered">
     <template #item="{ item, idx }">
-      <lockable
-        v-slot:default="{ attrs, locked }"
-        :attrs="{ item, idx, updateUncommitted: updateUncommitted.bind(this) }"
-      >
+      <lockable v-slot:default="{ attrs, locked }" :attrs="{ item, idx }">
         <input-text
           :unlocked="!locked"
           :value="attrs.item.value"
@@ -69,19 +66,6 @@ export default {
     itemModify: function(change, idx) {
       var result = { ...this.items[idx], ...change };
       this.$emit("item-modify", { newValue: result, idx });
-    },
-    updateUncommitted: function(change, idx) {
-      var result;
-      if (this.uncommitted.has(idx)) {
-        result = {
-          ...this.items[idx],
-          ...this.uncommitted.get(idx),
-          ...change
-        };
-      } else {
-        result = { ...this.items[idx], ...change };
-      }
-      this.uncommitted.set(idx, result);
     }
   },
   components: {
