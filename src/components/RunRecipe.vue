@@ -1,6 +1,6 @@
 <template>
-  <div ref="timer">
-    <p>{{ current }}</p>
+  <div>
+    <chronometer></chronometer>
     <list-wheel :items="items">
       <template v-slot:default="{item, idx}">
         <p class="number">{{ idx + 1 }}</p>
@@ -12,6 +12,7 @@
 
 <script>
 import ListWheel from "./ListWheel";
+import Chronometer from "./Chronometer";
 export default {
   data: function() {
     return {
@@ -34,7 +35,8 @@ export default {
     }
   },
   components: {
-    ListWheel
+    ListWheel,
+    Chronometer
   }
 };
 </script>
