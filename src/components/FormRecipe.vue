@@ -24,7 +24,7 @@
         @item-modify="recipe.instructions.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-steps>
       <label for="notes">Notes</label>
-      <input-text :value="recipe.notes" @input="notes = $event" />
+      <input-text :value="recipe.notes" @input="recipe.notes = $event" />
       <input type="submit" value="Save" @click.prevent="save" />
     </form>
     <a class="button-destroy" @click.prevent="destroy" v-if="!isNew">Delete</a>
