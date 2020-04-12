@@ -14,13 +14,14 @@
     </div>
     <h2>Steps</h2>
     <ol>
+      <div class="vr"></div>
       <li v-for="(instruction, idx) in recipe.instructions" :key="instruction + idx">
         <span>{{ idx + 1 }}</span>
         <span>{{ instruction.value }}</span>
       </li>
     </ol>
     <h2>Notes</h2>
-    <p>{{ recipe.notes }}</p>
+    <p class="notes">{{ recipe.notes }}</p>
     <button-navigate
       value="Edit"
       direction="right"
@@ -100,15 +101,32 @@ h2
         border-bottom: 0
 ol
   padding: 0
+  position: relative
   list-style-type: none
   display: flex
   flex-wrap: wrap
+  align-items: flex-start
+  white-space: pre-line
+  flex-direction: column
+  align-items: center
+  padding-left: 1rem
+  // border-left: 2px solid #4287f5
+  .vr
+    height: 100%
+    position: absolute
+    top: 0
+    width: .2rem
+    background-color: #457fd9
   li
     position: relative
-    margin: 1rem
+    margin: .7rem 0
     background-color: #fcf451
     padding: .5rem
     border-radius: 4px
+    &:first-of-type
+      margin-top: 0
+    &:last-of-type
+      margin-bottom: 0
     >span
       &:first-child
         position: absolute
@@ -122,4 +140,8 @@ ol
         max-width: 1.5rem
         min-width: 1rem
         padding: .1rem
+.notes
+  background-color: #30bfa3
+  border-radius: 7px
+  padding: .5rem
 </style>

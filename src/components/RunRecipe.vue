@@ -50,7 +50,7 @@ p
   text-align: left
 .number
   height: 2rem
-  width: 2rem
+  margin-right: .6rem
   font-size: 1.5rem
   align-self: flex-start
 </style>
