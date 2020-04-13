@@ -4,11 +4,13 @@
     <div class="chronometer-controls">
       <div class="chronometer-controls-left">
         <transition
-          :name="startTime == null ? 'start-first' : 'start-then'"
+          :name="firstTransition ? 'start-first' : 'start-then'"
+          @before-enter="startEnter"
           @after-leave="startLeft"
         >
           <img
-            v-if="startTime == null || paused"
+            ref="start"
+            v-if="!startTime || paused"
             key="start"
             class="button-start"
             @click="start"
@@ -16,9 +18,9 @@
             alt="start logo"
           />
         </transition>
-        <transition name="pause">
+        <transition :name="firstTransition || firstPause ? 'pause-first' : 'pause-then'">
           <img
-            v-if="startTime != null && !paused"
+            v-if="startTime && !paused"
             class="button-pause"
             @click="pause"
             src="../assets/img/pause.svg"
@@ -50,13 +52,15 @@ export default {
       id: null,
       paused: null,
       elapsedPaused: null,
-      startTransition: "start-first"
+      firstTransition: true,
+      startDefaultTransform: "",
+      firstPause: true
     };
   },
   mounted: function() {},
   computed: {
     elapsedTimeSeconds() {
-      return this.elapsedTime / 1000;
+      return ~~(this.elapsedTime / 1000);
     }
   },
   methods: {
@@ -67,12 +71,26 @@ export default {
       }
       this.startTime = Date.now();
       this.id = setInterval(this.timer, 100);
+      this.startDefaultTransform = this.$refs.start.style.transform;
     },
     stop: function() {
-      this.startTime = null;
-      this.elapsedTime = 0;
-      clearInterval(this.id);
-      this.id = null;
+      if (this.$refs.start) {
+        this.$refs.start.style.transform = this.startDefaultTransform;
+      } else {
+        this.firstPause = true;
+      }
+      this.startDefaultTransform = "";
+      this.$nextTick(
+        function() {
+          this.startTime = null;
+          this.elapsedTime = 0;
+          clearInterval(this.id);
+          this.id = null;
+          this.firstTransition = true;
+          this.paused = false;
+          this.elapsedPaused = null;
+        }.bind(this)
+      );
     },
     resume: function() {
       this.startTime += this.elapsedPaused;
@@ -90,11 +108,14 @@ export default {
         this.elapsedTime = Date.now() - this.startTime;
       }
     },
-    startLeft: function(el) {
+    startEnter: function(el) {
       if (this.startTime != null) {
-        console.log("reset");
-        el.style.transform = "unset";
+        el.style.transform = "translateX(0)";
       }
+    },
+    startLeft: function(el) {
+      this.firstTransition = false;
+      this.firstPause = false;
     }
   }
 };
@@ -132,17 +153,18 @@ export default {
     &:hover
       cursor: pointer
   .button-start
+    transition: transform 250ms linear
     transform: translateX(50%)
   .button-start, .button-pause
     right: 0
   .button-stop
     left: 0
-.start-first-enter-active
-  transition: all 250ms linear
-.start-first-leave-active
-  transition: all 250ms linear
-.start-first-enter, .start-first-leave-to
+.start-first-enter
+  transition: transform 250ms, opacity 250ms
+  transform: translate(50%, -100%) !important
   opacity: 0
+.start-first-leave-to
+  transition: transform 250ms
   transform: translate(50%, -100%) !important
 
 .start-then-enter-active
@@ -151,15 +173,21 @@ export default {
   transition: all 250ms linear
 .start-then-enter, .start-then-leave-to
   opacity: 0
-  transform: translateX(-100%)
 
-.pause-enter-active
+.pause-first-enter-active
   transition: all 250ms linear
-.pause-leave-active
+.pause-first-leave-active
   transition: all 250ms linear
-.pause-enter, .pause-leave-to
+.pause-first-enter, .pause-first-leave-to
   opacity: 0
   transform: translateX(-100%)
+
+.pause-then-enter-active
+  transition: all 250ms linear
+.pause-then-leave-active
+  transition: all 250ms linear
+.pause-then-enter, .pause-then-leave-to
+  opacity: 0
 
 .stop-enter-active, .stop-leave-active
   transition: all 250ms linear
