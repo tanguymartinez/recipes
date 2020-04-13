@@ -59,7 +59,10 @@ export default {
   mounted: function() {},
   computed: {
     displayTime() {
-      var diff = this.elapsedTime;
+      var diff =
+        this.duration > 0
+          ? this.duration * 1000 - this.elapsedTime
+          : this.elapsedTime;
       let millis = 60 * 60 * 1000;
       const HOURS = ~~(diff / millis);
       diff -= HOURS * millis;
@@ -69,6 +72,12 @@ export default {
 
       var pad = s => (("" + s).length < 2 ? "0" + s : s);
       return `${pad(HOURS)}:${pad(MINUTES)}:${pad(SECONDS)}`;
+    }
+  },
+  props: {
+    duration: {
+      type: Number,
+      default: 0
     }
   },
   methods: {
@@ -114,6 +123,9 @@ export default {
         this.elapsedPaused = Date.now() - (this.startTime + this.elapsedTime);
       } else {
         this.elapsedTime = Date.now() - this.startTime;
+      }
+      if (this.duration > 0 && this.duration * 1000 - this.elapsedTime <= 1) {
+        this.stop();
       }
     },
     startEnter: function(el) {
