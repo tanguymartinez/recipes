@@ -1,6 +1,6 @@
 <template>
   <div class="chronometer">
-    <p>{{ this.elapsedTimeSeconds }}</p>
+    <p>{{ this.displayTime }}</p>
     <div class="chronometer-controls">
       <div class="chronometer-controls-left">
         <transition
@@ -58,8 +58,17 @@ export default {
   },
   mounted: function() {},
   computed: {
-    elapsedTimeSeconds() {
-      return ~~(this.elapsedTime / 1000);
+    displayTime() {
+      var diff = this.elapsedTime;
+      let millis = 60 * 60 * 1000;
+      const HOURS = ~~(diff / millis);
+      diff -= HOURS * millis;
+      const MINUTES = ~~(diff / (millis /= 60));
+      diff -= MINUTES * millis;
+      const SECONDS = ~~(diff / (millis /= 60));
+
+      var pad = s => (("" + s).length < 2 ? "0" + s : s);
+      return `${pad(HOURS)}:${pad(MINUTES)}:${pad(SECONDS)}`;
     }
   },
   methods: {
@@ -122,25 +131,28 @@ export default {
 
 <style lang="sass" scoped>
 .chronometer
-  width: 6rem
+  width: 4rem
   height: 4rem
   padding: .5rem
-  border-radius: 3px
+  border-radius: 50%
   background-color: #2e2e2e
   display: flex
   flex-direction: column
   justify-content: space-between
   align-items: center
+  border: 5px solid #ff8526
   p
     background-color: #fff1c4
     border-radius: 2px
     width: 100%
     margin: 0
-    text-align: right
+    margin-top: 28%
+    text-align: center
   .chronometer-controls
     display: flex
     width: 100%
     position: relative
+    margin-bottom: .2rem
   [class^="chronometer-controls-"]
     position: relative
     width: 50%
