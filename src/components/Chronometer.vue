@@ -11,7 +11,6 @@
           <img
             ref="start"
             v-if="!startTime || paused"
-            key="start"
             class="button-start"
             @click="start"
             src="../assets/img/play.svg"
@@ -153,18 +152,19 @@ export default {
     &:hover
       cursor: pointer
   .button-start
-    transition: transform 250ms linear
+    transition: all 250ms linear
     transform: translateX(50%)
   .button-start, .button-pause
     right: 0
   .button-stop
     left: 0
 .start-first-enter
-  transition: transform 250ms, opacity 250ms
-  transform: translate(50%, -100%) !important
+  transition: all 250ms
   opacity: 0
+  transform: translate(50%, -100%) !important
 .start-first-leave-to
   transition: transform 250ms
+  opacity: 0
   transform: translate(50%, -100%) !important
 
 .start-then-enter-active
@@ -192,5 +192,6 @@ export default {
 .stop-enter-active, .stop-leave-active
   transition: all 250ms linear
 .stop-enter, .stop-leave-to
+  opacity: 0
   transform: translateX(100%)
 </style>
