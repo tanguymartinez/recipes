@@ -148,6 +148,8 @@ export default {
     margin: 0
     margin-top: 28%
     text-align: center
+    font-family: "Space Mono", monospace
+    font-size: .8rem
   .chronometer-controls
     display: flex
     width: 100%
