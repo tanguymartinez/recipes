@@ -20,8 +20,8 @@
         <span>{{ instruction.value }}</span>
       </li>
     </ol>
-    <h2>Notes</h2>
-    <p class="notes">{{ recipe.notes }}</p>
+    <h2 v-if="recipe.notes">Notes</h2>
+    <p class="notes" v-if="recipe.notes">{{ recipe.notes }}</p>
     <button-navigate
       value="Edit"
       direction="right"
