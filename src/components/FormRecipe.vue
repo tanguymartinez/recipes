@@ -23,6 +23,34 @@
         @item-remove="recipe.instructions.splice($event, 1)"
         @item-modify="recipe.instructions.splice($event.idx, 1, $event.newValue)"
       ></list-dynamic-steps>
+      <div class="row">
+        <div class="duration">
+          <label for="duration">Duration</label>
+          <div>
+            <input
+              type="number"
+              id="duration"
+              name="duration"
+              v-model="recipe.duration.value"
+              min="0"
+            />
+            <select name="unit" id="unit" v-model="recipe.duration.unit">
+              <option
+                v-for="(item, idx) in timeUnits"
+                :key="item + idx"
+                :value="item"
+                selected
+              >{{ item }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="serves">
+          <label for="serves">Serves</label>
+          <div>
+            <input type="number" name="serves" id="serves" min="0" v-model="recipe.serves" />
+          </div>
+        </div>
+      </div>
       <label for="notes">Notes</label>
       <input-text :value="recipe.notes" @input="recipe.notes = $event" />
       <input type="submit" value="Save" @click.prevent="save" />
@@ -46,8 +74,14 @@ export default {
         description: "",
         ingredients: [],
         instructions: [],
-        notes: ""
+        notes: "",
+        duration: {
+          value: "",
+          unit: ""
+        },
+        serves: ""
       },
+      timeUnits: ["min", "h"],
       isNew: false
     };
   },
@@ -152,4 +186,17 @@ h1
     cursor: pointer
     box-shadow: 0 0 10px #cc2f3c
     transform: scale(1.05)
+
+.row
+  display: flex
+  justify-content: space-between
+  align-items: center
+  label
+    margin: 0
+    margin-top: 3rem
+    margin-bottom: 1rem
+  >div
+    display: flex
+    flex-direction: column
+    align-items: flex-start
 </style>
