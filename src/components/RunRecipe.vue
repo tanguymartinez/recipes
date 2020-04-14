@@ -1,6 +1,6 @@
 <template>
   <div>
-    <chronometer></chronometer>
+    <chronometer duration="5"></chronometer>
     <list-wheel :items="items">
       <template v-slot:default="{item, idx}">
         <p class="number">{{ idx + 1 }}</p>

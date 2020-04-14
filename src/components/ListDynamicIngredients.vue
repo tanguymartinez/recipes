@@ -52,6 +52,7 @@
         type="number"
         placeholder="Quantity"
         @keydown.enter.prevent="itemAdd"
+        min="0"
       />
       <select ref="inputAddUnit" @keydown.enter.prevent="itemAdd">
         <option v-for="(item, idx) in units" :key="item + idx" :value="item">{{ item }}</option>
