@@ -2,6 +2,16 @@
   <div>
     <button-navigate value="Home" :to="{name: 'home'}" direction="left" />
     <h1>{{ recipe.name }}</h1>
+    <div class="duration-serves">
+      <div>
+        <img src="../assets/img/watch.svg" alt="watch logo" />
+        <p>{{ recipe.duration.value + " " + recipe.duration.unit }}</p>
+      </div>
+      <div>
+        <img src="../assets/img/person_blue.svg" alt="person logo" />
+        <p>x {{ recipe.serves }}</p>
+      </div>
+    </div>
     <p class="description">{{ recipe.description }}</p>
     <div class="container-ingredients">
       <h2>Ingredients</h2>
@@ -55,6 +65,20 @@ h1
   font-family: Photoshoot, Avenir, Helvetica, Arial, sans-serif
 *
   text-align: left
+.duration-serves
+  display: flex
+  justify-content: center
+  >div
+    display: flex
+    flex-direction: column
+    align-items: center
+    &:nth-child(1)
+      margin-right: 1.5rem
+    &:nth-child(2)
+      margin-left: 1.5rem
+  img
+    width: 3rem
+    max-height: 3rem
 .description
   white-space: pre-line
 ul, ol
