@@ -6,7 +6,7 @@
       <label for="name">Name</label>
       <input autocomplete="off" type="text" name="name" id="name" v-model="recipe.name" />
       <label for="description">Description</label>
-      <input-text :value="recipe.description" @input="description = $event" />
+      <input-text :value="recipe.description" @input="recipe.description = $event" />
       <label for="ingredients">Ingredients</label>
       <list-dynamic-ingredients
         :items="recipe.ingredients"

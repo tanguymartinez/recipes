@@ -2,7 +2,7 @@
   <div>
     <button-navigate value="Home" :to="{name: 'home'}" direction="left" />
     <h1>{{ recipe.name }}</h1>
-    <p>{{ recipe.description }}</p>
+    <p class="description">{{ recipe.description }}</p>
     <div class="container-ingredients">
       <h2>Ingredients</h2>
       <ul>
@@ -55,6 +55,8 @@ h1
   font-family: Photoshoot, Avenir, Helvetica, Arial, sans-serif
 *
   text-align: left
+.description
+  white-space: pre-line
 ul, ol
   text-align: left
   li
